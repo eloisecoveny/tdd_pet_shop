@@ -71,18 +71,13 @@ def add_pet_to_customer(customer, pet)
 end
 
 def customer_can_afford_pet(customer, pet)
-  if customer_cash(customer) >= pet[:price]
-    return true
-  else
-    return false
-  end
+  customer_cash(customer) >= pet[:price]
 end
 
 def sell_pet_to_customer(pet_shop, pet, customer)
   # Check if the pet is in stock
-  if pet_shop[:pets].include?(pet)
   # Check if the customer can afford the pet
-    if customer_can_afford_pet(customer, pet) == true
+  if pet && customer_can_afford_pet(customer, pet)
   # Remove cash from customer
       remove_customer_cash(customer, pet[:price])
   # Add cash to petshop
@@ -93,10 +88,9 @@ def sell_pet_to_customer(pet_shop, pet, customer)
       add_pet_to_customer(customer, pet)
   # Increase number of pets sold
       increase_pets_sold(pet_shop, 1)
-    else
-      return nil
-    end
-  else
-    return nil
+    # else
+    #   return nil
   end
+  # else
+  #   return nil
 end
